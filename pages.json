@@ -1,0 +1,57 @@
+{
+  "pages": [{
+    "path": "pages/home/home",
+    "style": {
+      "enablePullDownRefresh": true,
+      "onReachBottomDistance": 150
+    }
+  }, {
+    "path": "pages/upload/upload",
+    "style": {
+      "enablePullDownRefresh": false,
+      "navigationBarTitleText": "upload"
+    }
+
+  }, {
+    "path": "pages/warn/warn",
+    "style": {
+      "enablePullDownRefresh": false,
+      "navigationBarTitleText": "warn"
+    }
+
+  }, {
+    "path": "pages/about/about",
+    "style": {
+      "enablePullDownRefresh": false,
+      "navigationBarTitleText": "about "
+    }
+  }],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "tutuのSunRun",
+    "navigationBarBackgroundColor": "#1ca035"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/home/home",
+      "iconPath": "static/tarbarIcon/home.png",
+      "selectedIconPath": "static/tarbarIcon/home-active.png",
+      "text": "主页"
+    }, {
+      "pagePath": "pages/upload/upload",
+      "iconPath": "static/tarbarIcon/yunshangchuan.png",
+      "selectedIconPath": "static/tarbarIcon/yunshangchuan-active.png",
+      "text": "上传"
+    }, {
+      "pagePath": "pages/warn/warn",
+      "iconPath": "static/tarbarIcon/jinggao.png",
+      "selectedIconPath": "static/tarbarIcon/jinggao-active.png",
+      "text": "警告"
+    }, {
+      "pagePath": "pages/about/about",
+      "iconPath": "static/tarbarIcon/guanyu.png",
+      "selectedIconPath": "static/tarbarIcon/guanyu-active.png",
+      "text": "关于我"
+    }]
+  }
+}
