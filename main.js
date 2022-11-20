@@ -5,8 +5,9 @@ import store from './store'
 import {
   $http
 } from '@escook/request-miniprogram'
-$http.baseUrl = 'https://api.wtututu.top'
-$http.baseUrl = 'http://127.0.0.1:8000'
+// $http.baseUrl = 'https://api.wtututu.top'
+// $http.baseUrl = 'http://127.0.0.1:8000'
+$http.baseUrl = 'http://43.138.34.13:8001'
 
 Vue.prototype.$http = $http
 $http.befotrRequest = function() {

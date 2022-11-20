@@ -1,6 +1,6 @@
 <template>
   <view>
-    <uni-notice-bar show-icon scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得;另外,那位一直刷不上的私我下" />
+    <uni-notice-bar show-icon scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得" />
     <!-- 基本用法 -->
     <uni-search-bar @input="input" placeholder="快速找到" :radius="100"></uni-search-bar>
     <!-- 列表展示 -->
@@ -67,7 +67,7 @@
       this.getUsersList()
     },
     methods: {
-      ...mapMutations(['changeCount']),
+      ...mapMutations(['changeCount', 'changeAmount']),
       //获取用户信息
       async getUsersList(callback) {
         this.isLoading = true
@@ -83,6 +83,7 @@
         this.usersList = [...this.usersList, ...res.data]
         this.usersCount = res.count
         this.changeCount(this.usersList.length)
+        this.changeAmount(this.usersCount)
         this.setBadge()
       },
       // 时间转换函数
@@ -137,11 +138,7 @@
       })
 
     },
-    open() {
-      // 通过组件定义的ref调用uni-popup方法 ,如果传入参数 ，type 属性将失效 ，仅支持 ['top','left','bottom','right','center']
-      // this.$refs.popup.open('top')
-
-    }
+    open() {}
   }
 </script>
 

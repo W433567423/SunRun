@@ -19,10 +19,12 @@
           <!-- 高级选项 -->
           <uni-collapse>
             <uni-collapse-item title="高级选项">
-              <uni-data-picker class="advanced" placeholder="请选择速度" popup-title="请选择速度" :localdata="dataTree"
-                v-model="classes" @change="onchange" @nodeclick="onnodeclick" @popupopened="onpopupopened"
-                @popupclosed="onpopupclosed">
-              </uni-data-picker>
+              <uni-forms-item label="跑步时间" name="speed">
+                <uni-data-checkbox v-model="customFormData.speed" :localdata="speed" />
+              </uni-forms-item>
+              <uni-forms-item label="步数±50" name="step">
+                <uni-data-checkbox v-model="customFormData.step" :localdata="step" />
+              </uni-forms-item>
             </uni-collapse-item>
           </uni-collapse>
 
@@ -40,57 +42,31 @@
     mixins: [badgeMix],
     data() {
       return {
-        classes: '1-2',
-        dataTree: [{
+        //步数、跑步持续时间、跑步时间
+        step: [{
+            text: "1300",
+            value: "1300"
+          },
+          {
+            text: "1450",
+            value: "1400"
+          },
+          {
+            text: "1600",
+            value: "1600"
+          }
+        ],
+        speed: [{
             text: "快速",
-            value: "fast",
-            children: [{
-                text: "1300±50步",
-                value: "1300"
-              },
-              {
-                text: "1450±50步",
-                value: "1400"
-              },
-              {
-                text: "1600±50步",
-                value: "1600"
-              }
-            ]
+            value: "fast"
           },
           {
             text: "中速",
-            value: "Medium",
-            children: [{
-                text: "1300±50步",
-                value: "1300"
-              },
-              {
-                text: "1450±50步",
-                value: "1400"
-              },
-              {
-                text: "1600±50步",
-                value: "1600"
-              }
-            ]
+            value: "medium"
           },
           {
             text: "慢速",
-            value: "slow",
-            children: [{
-                text: "1300±50步",
-                value: "1300"
-              },
-              {
-                text: "1450±50步",
-                value: "1400"
-              },
-              {
-                text: "1600±50步",
-                value: "1600"
-              }
-            ]
+            value: "slow"
           }
         ],
         runtime: [{
@@ -101,14 +77,17 @@
           value: 'eve'
         }, {
           text: '随机',
-          value: 'random'
+          value: 'random',
+          disable: true
         }],
         // 自定义表单数据
         customFormData: {
           author: '',
           IMEI: '',
           username: '',
-          runtime: ''
+          runtime: '',
+          speed: '',
+          step: ''
         },
         // 自定义表单校验规则
         customRules: {
@@ -146,7 +125,7 @@
               required: true,
               errorMessage: '请勾选跑步时间'
             }]
-          },
+          }
         }
       }
     },
@@ -157,21 +136,19 @@
     },
     methods: {
       onnodeclick(e) {
-        console.log(e);
+        // console.log(e);
       },
       onpopupopened(e) {
-        console.log('popupopened');
+        // console.log('popupopened');
       },
       onpopupclosed(e) {
-        console.log('popupclosed');
+        // console.log('popupclosed');
       },
       onchange(e) {
-        console.log('onchange:', e);
+        // console.log('onchange:', e);
       },
       submit(ref) {
         this.$refs[ref].validate().then(res => {
-          console.log(res)
-          console.log('success', res);
           uni.showToast({
             title: `校验通过`
           })

@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: () => ({
-    ucount: 0
+    ucount: 0,
+    amount: 0
   }),
   mutations: {
     changeCount(state, num) {
       state.ucount = num
+    },
+    changeAmount(state, num) {
+      state.amount = num
     }
   }
 })
