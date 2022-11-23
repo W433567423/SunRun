@@ -7,13 +7,12 @@ import {
 } from '@escook/request-miniprogram'
 
 $http.baseUrl = 'https://api.wtututu.top'
-// $http.baseUrl = 'http://127.0.0.1:8000'
-// $http.baseUrl = 'http://43.138.34.13:8001'
 
-$http.beforeRequest = function() {
-  uni.showLoading({
-    title: '数据加载ing...'
-  })
+$http.beforeRequest = function(e) {
+  if (e.method == 'GET')
+    uni.showLoading({
+      title: '数据加载ing...'
+    })
 }
 $http.afterRequest = function() {
   uni.hideLoading()

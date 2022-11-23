@@ -138,12 +138,12 @@
       submit(ref) {
         this.$refs[ref].validate().then(res => this.upload(res))
       },
-      upload(query) {
+      async upload(query) {
         const {
           data: res
-        } = this.$http.post('/api/sunrun', query)
+        } = await this.$http.post('/api/sunrun', query)
         if (res.status !== 200) this.$showMsg('上传失败,请向作者反馈bug')
-        this.$showMsg('提交成功')
+        this.$showMsg(res.msg)
       }
     }
   }
