@@ -86,8 +86,8 @@
           IMEI: '',
           username: '',
           runtime: '',
-          speed: '',
-          step: ''
+          speed: 'undefined',
+          step: 'undefined'
         },
         // 自定义表单校验规则
         customRules: {
@@ -135,29 +135,15 @@
       this.$refs.customForm.setRules(this.customRules)
     },
     methods: {
-      onnodeclick(e) {
-        // console.log(e);
-      },
-      onpopupopened(e) {
-        // console.log('popupopened');
-      },
-      onpopupclosed(e) {
-        // console.log('popupclosed');
-      },
-      onchange(e) {
-        // console.log('onchange:', e);
-      },
       submit(ref) {
-        this.$refs[ref].validate().then(res => {
-          uni.showToast({
-            title: `校验通过`
-          })
-          const {
-            data
-          } = this.$http.post('/api/sunrun', res).then(response => this.$showMsg(response.data.msg)).catch(err => {
-            console.log('err', err);
-          })
-        })
+        this.$refs[ref].validate().then(res => this.upload(res))
+      },
+      upload(query) {
+        const {
+          data: res
+        } = this.$http.post('/api/sunrun', query)
+        if (res.status !== 200) this.$showMsg('上传失败,请向作者反馈bug')
+        this.$showMsg('提交成功')
       }
     }
   }

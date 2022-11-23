@@ -25,6 +25,13 @@
       "enablePullDownRefresh": false,
       "navigationBarTitleText": "about "
     }
+  }, {
+    "path": "pages/pc/pc",
+    "style": {
+      "navigationStyle": "custom",
+      "enablePullDownRefresh": false
+    }
+
   }],
   "globalStyle": {
     "navigationBarTextStyle": "black",

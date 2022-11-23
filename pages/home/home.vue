@@ -4,38 +4,35 @@
     <!-- 基本用法 -->
     <uni-search-bar @input="input" placeholder="快速找到" :radius="100"></uni-search-bar>
     <!-- 列表展示 -->
-    <uni-collapse v-if="showList">
+    <uni-collapse v-if="isShowList">
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
         <view class="content">
           <uni-list v-for="(item,i) in usersList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))" showArrow
-              v-if="(Number(new Date()) - Number(item.time))>0">
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))"
+              v-if="!timeToDuration(Number(item.time)).includes('-')">
             </uni-list-item>
-            <uni-list-item :title="item.username" :disabled="true" :rightText="'有效期:'+timeToDuration(Number(item.time))"
-              showArrow v-if="(Number(new Date()) - Number(item.time))<0">
+            <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效"
+              v-if="timeToDuration(Number(item.time)).includes('-')">
             </uni-list-item>
           </uni-list>
         </view>
       </uni-collapse-item>
     </uni-collapse>
     <!--筛选 -->
-    <uni-collapse v-if="!showList">
-      <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true" v-if="!showList">
+    <uni-collapse v-if="!isShowList">
+      <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true" v-if="!isShowList">
         <view class="content">
           <uni-list v-for="(item,i) in newList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))" showArrow
-              v-if="(Number(new Date()) - Number(item.time))>0">
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))"
+              v-if="!timeToDuration(Number(item.time)).includes('-')">
             </uni-list-item>
-            <uni-list-item :title="item.username" :disabled="true" :rightText="'有效期:'+timeToDuration(Number(item.time))"
-              showArrow v-if="(Number(new Date()) - Number(item.time))<0">
+            <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效"
+              v-if="timeToDuration(Number(item.time)).includes('-')">
             </uni-list-item>
           </uni-list>
         </view>
       </uni-collapse-item>
     </uni-collapse>
-    <!-- 弹出层 -->
-    <!-- <uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical"
-      :direction="direction" @trigger="trigger" @fabClick="fabClick" /> -->
 
   </view>
 </template>
@@ -60,11 +57,14 @@
         // 节流阀
         isLoading: true,
         //
-        showList: true
+        isShowList: true
       };
     },
     onLoad() {
       this.getUsersList()
+    },
+    onShow() {
+      this.getUsersList(() => {})
     },
     methods: {
       ...mapMutations(['changeCount', 'changeAmount']),
@@ -75,12 +75,14 @@
           data: res
         } = await this.$http.get('/api/sunrun', this.queryObject)
         this.isLoading = false
-        callback && callback()
         if (res.status !== 200) this.$showMsg()
         if (res.data.length !== this.queryObject.limit) this.$showMsg('没有更多了呢，宝')
-        if (callback)
-          return
-        this.usersList = [...this.usersList, ...res.data]
+        if (callback) {
+          this.usersList = res.data
+          callback()
+        } else {
+          this.usersList = [...this.usersList, ...res.data]
+        }
         this.usersCount = res.count
         this.changeCount(this.usersList.length)
         this.changeAmount(this.usersCount)
@@ -106,11 +108,10 @@
       },
       //搜索框事件
       input(e) {
-        console.log(!!!e)
         if (!!!e) {
-          this.showList = true
+          this.isShowList = true
         } else {
-          this.showList = false
+          this.isShowList = false
           //请求所有数据
           this.getNewList(e)
         }
@@ -136,7 +137,6 @@
         uni.stopPullDownRefresh()
         this.$showMsg('刷新成功')
       })
-
     },
     open() {}
   }
