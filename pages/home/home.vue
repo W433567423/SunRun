@@ -52,7 +52,7 @@
           limit: 20
         },
         usersList: [],
-        usersCount: 1,
+        usersCount: 0,
         newList: [],
         // 节流阀
         isLoading: true,
@@ -64,7 +64,7 @@
       this.getUsersList()
     },
     onShow() {
-      this.getUsersList(() => {})
+      // this.getUsersList(() => {})
     },
     methods: {
       ...mapMutations(['changeCount', 'changeAmount']),
@@ -77,12 +77,8 @@
         this.isLoading = false
         if (res.status !== 200) this.$showMsg()
         if (res.data.length !== this.queryObject.limit) this.$showMsg('没有更多了呢，宝')
-        if (callback) {
-          this.usersList = res.data
-          callback()
-        } else {
-          this.usersList = [...this.usersList, ...res.data]
-        }
+        callback && callback()
+        this.usersList = [...this.usersList, ...res.data]
         this.usersCount = res.count
         this.changeCount(this.usersList.length)
         this.changeAmount(this.usersCount)
@@ -133,6 +129,9 @@
     },
     onPullDownRefresh() {
       this.isLoading = false
+      this.queryObject.page = 0
+      this.usersList = []
+      this.usersCount = 0
       this.getUsersList(() => {
         uni.stopPullDownRefresh()
         this.$showMsg('刷新成功')
