@@ -7,6 +7,7 @@ import {
 } from '@escook/request-miniprogram'
 
 $http.baseUrl = 'https://api.wtututu.top'
+// $http.baseUrl = 'http://127.0.0.1:8000'
 
 $http.beforeRequest = function(e) {
   if (e.method == 'GET')

@@ -8,7 +8,8 @@
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
         <view class="content">
           <uni-list v-for="(item,i) in usersList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))"
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))" link
+              :to="'/pages/person/person?username='+item.username"
               v-if="!timeToDuration(Number(item.time)).includes('-')">
             </uni-list-item>
             <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效"
@@ -33,7 +34,8 @@
         </view>
       </uni-collapse-item>
     </uni-collapse>
-
+    <!-- 悬浮 -->
+    <my-button></my-button>
   </view>
 </template>
 
@@ -84,6 +86,15 @@
         this.changeAmount(this.usersCount)
         this.setBadge()
       },
+      async getNewList(e) {
+        const {
+          data: res
+        } = await this.$http.get('/api/sunrun', {
+          salvage: e
+        })
+        if (res.status !== 200) this.$showMsg()
+        this.newList = res.data
+      },
       // 时间转换函数
       timeToDuration(etime, stime = (new Date()).valueOf()) {
         let usedTime = etime + 86400000 * 7 - stime
@@ -112,14 +123,11 @@
           this.getNewList(e)
         }
       },
-      async getNewList(e) {
-        const {
-          data: res
-        } = await this.$http.get('/api/sunrun', {
-          salvage: e
+      //前往Person
+      gotoPerson(username) {
+        uni.navigateTo({
+          url: '/page/person/person?username=' + username
         })
-        if (res.status !== 200) this.$showMsg()
-        this.newList = res.data
       }
     },
     onReachBottom() {
@@ -136,8 +144,7 @@
         uni.stopPullDownRefresh()
         this.$showMsg('刷新成功')
       })
-    },
-    open() {}
+    }
   }
 </script>
 

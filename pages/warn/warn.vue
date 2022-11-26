@@ -10,6 +10,20 @@
       <uni-section title="" type="line">
         <view class="content">
           <view v-if="active === 0">
+            <uni-group title="食用教程" top="20">
+              <uni-row class="demo-uni-row" :width="nvueWidth">
+                <uni-col :span="16">
+                  <view class="demo-uni-col dark"><text style="color: skyblue;"
+                      @click="gotoWeb('https://czyx007.cn/archives/wireshark-sunnyrun')">HttpCanary食用方法
+                    </text></view>
+                </uni-col>
+              </uni-row>
+            </uni-group>
+            <uni-group title="个人制作教程">
+              <teach></teach>
+            </uni-group>
+          </view>
+          <view v-if="active === 1">
             安卓:<uni-icons type="cloud-download" size="24"></uni-icons>
             <uni-link href="https://wwc.lanzoul.com/iPrXN0da7vpc" color="#999999" text="HttpCanary"
               showUnderLine="false" font-size="20"></uni-link>[密码:tutu]<br>
@@ -23,34 +37,7 @@
 
 
           </view>
-          <view v-if="active === 1">
-            <uni-group title="抓包教学文档" top="20">
-              <uni-row class="demo-uni-row" :width="nvueWidth">
-                <uni-col :span="16">
-                  <view class="demo-uni-col dark"><text style="color: skyblue;"
-                      @click="gotoWeb('https://czyx007.cn/archives/wireshark-sunnyrun')">HttpCanary食用教程
-                    </text></view>
-                </uni-col>
-              </uni-row>
-            </uni-group>
 
-            <uni-group title="本人录制的教程视频(百度网盘)">
-              <uni-row class="demo-uni-row" :width="nvueWidth">
-                <uni-col :span="12">
-                  <view class="demo-uni-col dark"><text style="color: skyblue;"
-                      @click="gotoWeb('https://pan.baidu.com/s/1JK7oZwz_cYVf7tXTUW7P0Q?pwd=tutu')">安卓抓包视频
-                    </text></view>
-                </uni-col>
-                <uni-col :span="12">
-                  <view class="demo-uni-col light"><text style="color: skyblue;"
-                      @click="gotoWeb('https://pan.baidu.com/s/1zObXOUBfnVl6PBk-ItEaWQ?pwd=tutu')">IOS抓包视频</text>
-                  </view>
-                </uni-col>
-              </uni-row>
-            </uni-group>
-            <uni-group title="待添加">
-            </uni-group>
-          </view>
           <view v-if="active === 2">
             <view class="tag-view">
               <uni-tag text="没啥好说的，按视频/教程一步步来" type="warning" />
@@ -88,11 +75,11 @@
         nvueWidth: 730,
         active: 0,
         list: [{
-          title: '安装软件',
-          desc: 'L'
-        }, {
           title: '观看教程',
           desc: 'O'
+        }, {
+          title: '安装软件',
+          desc: 'L'
         }, {
           title: '上手抓包',
           desc: 'V'
