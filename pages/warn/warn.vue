@@ -7,56 +7,55 @@
     </uni-section> -->
     <uni-section title="食用步骤" type="line" padding>
       <uni-steps :options="list" active-icon="medal" :active="active" />
-      <uni-section title="" type="line">
-        <view class="content">
-          <view v-if="active === 0">
-            <uni-group title="食用教程" top="20">
-              <uni-row class="demo-uni-row" :width="nvueWidth">
-                <uni-col :span="16">
-                  <view class="demo-uni-col dark"><text style="color: skyblue;"
-                      @click="gotoWeb('https://czyx007.cn/archives/wireshark-sunnyrun')">HttpCanary食用方法
-                    </text></view>
-                </uni-col>
-              </uni-row>
-            </uni-group>
-            <uni-group title="个人制作教程">
-              <teach></teach>
-            </uni-group>
-          </view>
-          <view v-if="active === 1">
-            安卓:<uni-icons type="cloud-download" size="24"></uni-icons>
-            <uni-link href="https://wwc.lanzoul.com/iPrXN0da7vpc" color="#999999" text="HttpCanary"
-              showUnderLine="false" font-size="20"></uni-link>[密码:tutu]<br>
-            <button class="mini-btn" type="primary" size="mini"
-              @click="gotoWeb('https://wwc.lanzoul.com/iPrXN0da7vpc')">立即下载</button><br>
-            IOS:<uni-icons type="cloud-download" size="24"></uni-icons>
-            <uni-link href="https://apps.apple.com/cn/app/stream/id1312141691" color="#999999" text="Stream"
-              showUnderLine="false" font-size="20"></uni-link><br>
-            <button class="mini-btn" type="primary" size="mini"
-              @click="gotoWeb('https://apps.apple.com/cn/app/stream/id1312141691')">立即下载</button>
+      <view class="content">
 
+        <view v-if="active === 0">
+          <uni-group title="食用教程">
+            <uni-row class="demo-uni-row" :width="nvueWidth">
+              <uni-col :span="14">
+                <view class="demo-uni-col dark"><text style="color: skyblue;"
+                    @click="gotoWeb('https://czyx007.cn/archives/wireshark-sunnyrun')">HttpCanary食用方法
+                  </text></view>
+              </uni-col>
+            </uni-row>
+          </uni-group>
+          <uni-group title="个人制作教程">
+            <teach></teach>
+          </uni-group>
+        </view>
 
-          </view>
+        <view v-if="active === 1">
+          安卓:<uni-icons type="cloud-download" size="24"></uni-icons>
+          <uni-link href="https://wwc.lanzoul.com/iPrXN0da7vpc" color="#999999" text="HttpCanary" showUnderLine="false"
+            font-size="20"></uni-link>[密码:tutu]<br>
+          <button class="mini-btn" type="primary" size="mini"
+            @click="gotoWeb('https://wwc.lanzoul.com/iPrXN0da7vpc')">立即下载</button><br>
+          IOS:<uni-icons type="cloud-download" size="24"></uni-icons>
+          <uni-link href="https://apps.apple.com/cn/app/stream/id1312141691" color="#999999" text="Stream"
+            showUnderLine="false" font-size="20"></uni-link><br>
+          <button class="mini-btn" type="primary" size="mini"
+            @click="gotoWeb('https://apps.apple.com/cn/app/stream/id1312141691')">立即下载</button>
+        </view>
 
-          <view v-if="active === 2">
-            <view class="tag-view">
-              <uni-tag text="没啥好说的，按视频/教程一步步来" type="warning" />
-            </view>
-            <view class="tag-view">
-              <uni-tag text="QQ:2232202990(付费答疑，3r解君愁)" type="success" />
-            </view>
+        <view v-if="active === 2">
+          <view class="tag-view">
+            <uni-tag text="没啥好说的，按视频/教程一步步来" type="warning" />
           </view>
-          <view v-if="active === 3">
-            注意事项
-            <ul>
-              <li>每个人只用一个昵称，滥用昵称</li>
-              <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
-              <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
-              <li>南湖也可以用，不要再来问我了！很忙，谢谢！</li>
-            </ul>
+          <view class="tag-view">
+            <uni-tag text="QQ:2232202990(付费答疑，3r解君愁)" type="success" />
           </view>
         </view>
-      </uni-section>
+
+        <view v-if="active === 3">
+          注意事项
+          <ul>
+            <li>每个人只用一个昵称，滥用昵称后果自负</li>
+            <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
+            <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
+            <li>南湖也可以用，不要再来问我了！很忙，谢谢！</li>
+          </ul>
+        </view>
+      </view>
     </uni-section>
     <footer><button type="primary" size="mini" @click="change">下一步</button>
       <text>本站承诺永久免费，但是不承诺永久维护</text>
@@ -112,11 +111,6 @@
 
 <style lang="scss">
   .demo-uni-row {
-    margin-bottom: 10px;
-
-    // 组件在小程序端display为inline
-    // QQ、字节小程序文档写有 :host，但实测不生效
-    // 百度小程序没有 :host
     /* #ifdef MP-TOUTIAO || MP-QQ || MP-BAIDU */
     display: block;
     /* #endif */
@@ -132,10 +126,10 @@
   /* #endif */
 
   .demo-uni-col {
-    height: 36px;
-    border-radius: 5px;
-    line-height: 36px;
-    margin: 0 20px;
+    height: 30px;
+    border-radius: 10px;
+    line-height: 30px;
+    margin: 0 15px;
     padding: 0 15px;
   }
 
@@ -164,8 +158,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    bottom: 0px;
-    bottom: 50px;
+    bottom: 32px;
     width: 100%;
     height: 100px;
 
@@ -173,7 +166,7 @@
       display: block;
       width: 100px;
       height: 30px;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
     }
   }
 </style>

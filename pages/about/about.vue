@@ -34,7 +34,9 @@
         <image src="../../static/image/zfb.jpg" mode=""></image>
       </uni-popup>
     </view>
+    <!-- 花里胡哨 -->
   </view>
+
 </template>
 
 <script>

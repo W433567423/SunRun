@@ -39,6 +39,11 @@
         showLeft: false
       };
     },
+    onReady: function(res) {
+      // #ifndef MP-ALIPAY
+      this.videoContext = uni.createVideoContext('myVideo')
+      // #endif
+    },
     methods: {
       confirm() {},
       // 打开窗口
@@ -69,13 +74,17 @@
         this.$refs.showRight.close()
         return true
       }
+    },
+    //视频
+    videoErrorCallback() {
+      console.log('error')
     }
   }
 </script>
 
 <style lang="scss">
   .example-body {
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .close {

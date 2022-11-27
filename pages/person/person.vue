@@ -2,10 +2,12 @@
   <view>
     <view v-if="personData">
       <uni-section class="mb-10" :title="'有效跑步次数:'+personData.RaceNums+'次'"
-        :sub-title="'晨跑次数:'+personData.RaceMNums+'次'" type="line">
+        :sub-title="'晨跑次数:'+personData.RaceMNums+'次'" type="circle">
+
         <template v-slot:right>
           总次数:{{personData.AllCount}}次
         </template>
+        <button></button>
       </uni-section>
       <uni-list :border="true">
         <view v-for="(item,index) in personData.listValue" :key="index">
