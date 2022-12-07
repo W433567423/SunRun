@@ -70,10 +70,10 @@
           }
         ],
         runtime: [{
-          text: '晨跑',
+          text: '晨跑(7:14)',
           value: 'mor'
         }, {
-          text: '晚跑',
+          text: '晚跑(20:14)',
           value: 'eve'
         }, {
           text: '随机',

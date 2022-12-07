@@ -46,12 +46,9 @@
         const {
           data: res
         } = await this.$http.get('/api/sunrun/data?username=' + username)
-        // console.log(res)
         this.personData = res.data
-        // console.log(res.data)
       },
       setBadge(text) {
-        console.log(text)
         uni.setNavigationBarTitle({
           title: text
         })

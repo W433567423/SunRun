@@ -39,10 +39,13 @@
 
         <view v-if="active === 2">
           <view class="tag-view">
-            <uni-tag text="没啥好说的，按视频/教程一步步来" type="warning" />
-          </view>
-          <view class="tag-view">
-            <uni-tag text="QQ:2232202990(付费答疑，3r解君愁)" type="success" />
+            <ul>
+              <li>付费答疑:QQ:227384408</li>
+              <li>不付费你来当免费客服！</li>
+              <li>先点击右下角关于我，再点击乐捐</li>
+              <li>【重申：付费的意义仅仅是为了避免不动脑就打扰】/li>
+              <li>一次三元，三元解君愁！！！</li>
+            </ul>
           </view>
         </view>
 
@@ -75,10 +78,10 @@
         active: 0,
         list: [{
           title: '观看教程',
-          desc: 'O'
+          desc: 'L'
         }, {
           title: '安装软件',
-          desc: 'L'
+          desc: 'O'
         }, {
           title: '上手抓包',
           desc: 'V'

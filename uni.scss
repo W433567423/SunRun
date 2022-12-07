@@ -1,13 +1,2 @@
+@import '@/static/customicons.css';
 @import '@/uni_modules/uni-scss/variables.scss';
-/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
-@font-face {
-  font-family: "仓耳渔阳体 W04";font-weight: 400;src: url("//at.alicdn.com/wf/webfont/UJpeQdBaZWWp/QmWemG8SoRDcC0YJMI8zC.woff2") format("woff2"),
-  url("//at.alicdn.com/wf/webfont/UJpeQdBaZWWp/QK9oZYll3AQb4MfNR-HoR.woff") format("woff");
-  font-display: swap;
-}
-//汉字
-
-
-view {
-  font-family: "仓耳渔阳体 W04", STXinwei !important;
-}

@@ -1,6 +1,16 @@
 <template>
   <view>
-    <uni-notice-bar show-icon scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得" />
+    <uni-notice-bar class='notice' show-icon scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得" />
+    <uni-row class="demo-uni-row" width="730">
+      <uni-col :span="12">
+        <view class="demo-uni-col dark">本站已运行<text style="color:red">{{timeD}}</text>
+        </view>
+      </uni-col>
+      <uni-col :span="12">
+        <view class="demo-uni-col light">成功为<text style="color:red">{{usersCount}}</text>位小可耐云跑步
+        </view>
+      </uni-col>
+    </uni-row>
     <!-- 基本用法 -->
     <uni-search-bar @input="input" placeholder="快速找到" :radius="100"></uni-search-bar>
     <!-- 列表展示 -->
@@ -8,12 +18,12 @@
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
         <view class="content">
           <uni-list v-for="(item,i) in usersList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))" link
-              :to="'/pages/person/person?username='+item.username"
-              v-if="!timeToDuration(Number(item.time)).includes('-')">
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time)+ 86400000 * 7)"
+              link :to="'/pages/person/person?username='+item.username"
+              v-if="!timeToDuration(Number(item.time)+ 86400000 * 7).includes('-')">
             </uni-list-item>
-            <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效"
-              v-if="timeToDuration(Number(item.time)).includes('-')">
+
+            <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
             </uni-list-item>
           </uni-list>
         </view>
@@ -24,11 +34,11 @@
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true" v-if="!isShowList">
         <view class="content">
           <uni-list v-for="(item,i) in newList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time))"
-              v-if="!timeToDuration(Number(item.time)).includes('-')">
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time)+ 86400000 * 7)"
+              link :to="'/pages/person/person?username='+item.username"
+              v-if="!timeToDuration(Number(item.time)+ 86400000 * 7).includes('-')">
             </uni-list-item>
-            <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效"
-              v-if="timeToDuration(Number(item.time)).includes('-')">
+            <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
             </uni-list-item>
           </uni-list>
         </view>
@@ -51,22 +61,21 @@
       return {
         queryObject: {
           page: 0,
-          limit: 20
+          limit: 25
         },
         usersList: [],
         usersCount: 0,
         newList: [],
         // 节流阀
         isLoading: true,
-        //
-        isShowList: true
+        isShowList: true,
+        timeD: 0
       };
     },
     onLoad() {
       this.getUsersList()
-    },
-    onShow() {
-      // this.getUsersList(() => {})
+      this.timeD = this.timeToDuration((new Date()).getTime(), 1665098803000, true)
+      this.getTimeD()
     },
     methods: {
       ...mapMutations(['changeCount', 'changeAmount']),
@@ -96,15 +105,24 @@
         this.newList = res.data
       },
       // 时间转换函数
-      timeToDuration(etime, stime = (new Date()).valueOf()) {
-        let usedTime = etime + 86400000 * 7 - stime
+      timeToDuration(etime, stime = (new Date()).getTime(), sec = false) {
+        //总毫秒数
+        let usedTime = etime - stime
         let days = Math.floor(usedTime / (24 * 3600 * 1000))
+        //总毫秒数（时级）
         let leave1 = usedTime % (24 * 3600 * 1000)
         let hours = Math.floor(leave1 / (3600 * 1000))
+        //总毫秒数
         let leave2 = leave1 % (3600 * 1000)
         let minutes = Math.floor(leave2 / (60 * 1000))
         let time = days + "天" + hours + "时" + minutes + "分"
-        return time;
+        if (!sec)
+          return time
+        else {
+          let leave3 = leave2 % (60 * 1000)
+          let seconds = Math.floor(leave3 / (1000))
+          return time + seconds + "秒"
+        }
       },
       //设置徽标
       setBadge() {
@@ -128,12 +146,18 @@
         uni.navigateTo({
           url: '/page/person/person?username=' + username
         })
+      },
+      getTimeD() {
+        setInterval(() =>
+          this.timeD = this.timeToDuration((new Date()).getTime(), 1665098803000, true), 1000)
       }
     },
     onReachBottom() {
-      this.queryObject.page++
-      this.isLoading = true
-      this.getUsersList()
+      if (this.isShowList) {
+        this.queryObject.page++
+        this.isLoading = true
+        this.getUsersList()
+      }
     },
     onPullDownRefresh() {
       this.isLoading = false
@@ -149,4 +173,26 @@
 </script>
 
 <style lang="scss">
+  .notice {
+    z-index: 999;
+    position: fixed;
+    top: 40px;
+    left: 0;
+  }
+
+  .demo-uni-col {
+    margin-top: 40px;
+    height: 36px;
+    border-radius: 5px;
+    line-height: 36px;
+    text-align: center;
+  }
+
+  .dark {
+    background-color: #d3dce6;
+  }
+
+  .light {
+    background-color: #e5e9f2;
+  }
 </style>
