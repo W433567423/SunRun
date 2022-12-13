@@ -1,26 +1,33 @@
 <template>
   <view>
     <uni-notice-bar class='notice' show-icon scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得" />
-    <uni-row class="demo-uni-row" width="730">
-      <uni-col :span="12">
+    <uni-row class="demo-uni-row tip" width="730">
+      <uni-col :span="11">
         <view class="demo-uni-col dark">本站已运行<text style="color:red">{{timeD}}</text>
         </view>
       </uni-col>
-      <uni-col :span="12">
+      <uni-col :span="11">
         <view class="demo-uni-col light">成功为<text style="color:red">{{usersCount}}</text>位小可耐云跑步
         </view>
       </uni-col>
     </uni-row>
     <!-- 基本用法 -->
-    <uni-search-bar @input="input" placeholder="快速找到" :radius="100"></uni-search-bar>
+    <uni-search-bar placeholder="快速找到" :radius="100" v-model="query"></uni-search-bar>
     <!-- 列表展示 -->
+    <uni-list style='color: red;'>
+      <!-- 假期提示 -->
+      <uni-list-item rightText="浪费性能"><template v-slot:body>
+          <text class="slot-box slot-text">放寒暑假就别上传了</text>
+        </template></uni-list-item>
+    </uni-list>
+
     <uni-collapse v-if="isShowList">
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
         <view class="content">
           <uni-list v-for="(item,i) in usersList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time)+ 86400000 * 7)"
-              link :to="'/pages/person/person?username='+item.username"
-              v-if="!timeToDuration(Number(item.time)+ 86400000 * 7).includes('-')">
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link
+              :to="'/pages/person/person?username='+item.username"
+              v-if="!timeToDur(Number(item.time)+ 86400000 * 7).includes('-')">
             </uni-list-item>
 
             <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
@@ -34,9 +41,9 @@
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true" v-if="!isShowList">
         <view class="content">
           <uni-list v-for="(item,i) in newList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDuration(Number(item.time)+ 86400000 * 7)"
-              link :to="'/pages/person/person?username='+item.username"
-              v-if="!timeToDuration(Number(item.time)+ 86400000 * 7).includes('-')">
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link
+              :to="'/pages/person/person?username='+item.username"
+              v-if="!timeToDur(Number(item.time)+ 86400000 * 7).includes('-')">
             </uni-list-item>
             <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
             </uni-list-item>
@@ -69,13 +76,46 @@
         // 节流阀
         isLoading: true,
         isShowList: true,
-        timeD: 0
+        timeD: 0,
+        //双向绑定搜索值
+        query: ''
       };
     },
-    onLoad() {
-      this.getUsersList()
-      this.timeD = this.timeToDuration((new Date()).getTime(), 1665098803000, true)
-      this.getTimeD()
+    computed: {
+      // 时间转换计算属性
+      timeToDur() {
+        return (etime, stime = (new Date()).getTime(), sec = false) => {
+          //总毫秒数
+          let usedTime = etime - stime
+          let days = Math.floor(usedTime / (24 * 3600 * 1000))
+          //总毫秒数（时级）
+          let leave1 = usedTime % (24 * 3600 * 1000)
+          let hours = Math.floor(leave1 / (3600 * 1000))
+          //总毫秒数
+          let leave2 = leave1 % (3600 * 1000)
+          let minutes = Math.floor(leave2 / (60 * 1000))
+          let time = days + "天" + hours + "时" + minutes + "分"
+          if (!sec)
+            return time
+          else {
+            let leave3 = leave2 % (60 * 1000)
+            let seconds = Math.floor(leave3 / (1000))
+            return time + seconds + "秒"
+          }
+        }
+      }
+    },
+    watch: {
+      //搜索词侦听
+      query(newValue, oldValue) {
+        if (!newValue)
+          this.isShowList = true
+        else {
+          this.isShowList = false
+          //请求所有数据
+          this.getSerachList(newValue)
+        }
+      }
     },
     methods: {
       ...mapMutations(['changeCount', 'changeAmount']),
@@ -95,7 +135,7 @@
         this.changeAmount(this.usersCount)
         this.setBadge()
       },
-      async getNewList(e) {
+      async getSerachList(e) {
         const {
           data: res
         } = await this.$http.get('/api/sunrun', {
@@ -104,42 +144,12 @@
         if (res.status !== 200) this.$showMsg()
         this.newList = res.data
       },
-      // 时间转换函数
-      timeToDuration(etime, stime = (new Date()).getTime(), sec = false) {
-        //总毫秒数
-        let usedTime = etime - stime
-        let days = Math.floor(usedTime / (24 * 3600 * 1000))
-        //总毫秒数（时级）
-        let leave1 = usedTime % (24 * 3600 * 1000)
-        let hours = Math.floor(leave1 / (3600 * 1000))
-        //总毫秒数
-        let leave2 = leave1 % (3600 * 1000)
-        let minutes = Math.floor(leave2 / (60 * 1000))
-        let time = days + "天" + hours + "时" + minutes + "分"
-        if (!sec)
-          return time
-        else {
-          let leave3 = leave2 % (60 * 1000)
-          let seconds = Math.floor(leave3 / (1000))
-          return time + seconds + "秒"
-        }
-      },
       //设置徽标
       setBadge() {
         uni.setTabBarBadge({
           index: 0,
           text: this.usersList.length + ''
         })
-      },
-      //搜索框事件
-      input(e) {
-        if (!!!e) {
-          this.isShowList = true
-        } else {
-          this.isShowList = false
-          //请求所有数据
-          this.getNewList(e)
-        }
       },
       //前往Person
       gotoPerson(username) {
@@ -149,8 +159,13 @@
       },
       getTimeD() {
         setInterval(() =>
-          this.timeD = this.timeToDuration((new Date()).getTime(), 1665098803000, true), 1000)
+          this.timeD = this.timeToDur((new Date()).getTime(), 1665098803000, true), 1000)
       }
+    },
+    onLoad() {
+      this.getUsersList()
+      this.timeD = this.timeToDur((new Date()).getTime(), 1665098803000, true)
+      this.getTimeD()
     },
     onReachBottom() {
       if (this.isShowList) {
@@ -178,6 +193,11 @@
     position: fixed;
     top: 40px;
     left: 0;
+  }
+
+  .tip {
+    display: flex;
+    justify-content: space-around;
   }
 
   .demo-uni-col {

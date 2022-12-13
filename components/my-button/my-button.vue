@@ -32,7 +32,7 @@
           {
             iconPath: '/static/tarbarIcon/jinggao.png',
             selectedIconPath: '/static/tarbarIcon/jinggao-active.png',
-            text: '警告',
+            text: '教程',
             active: false
           }
         ]
