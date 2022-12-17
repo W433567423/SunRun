@@ -2,7 +2,7 @@
   <view>
     <uni-section title="安卓教程" type="line">
       <view class="example-body">
-        <button type="primary" @click="showDrawer('showLeft')"><text class="word-btn-white">HttpCanary</text>
+        <button type="primary" @click="showDrawer('showLeft')"><text class="word-btn-white">HttpCanary食用方法</text>
         </button>
         <uni-drawer ref="showLeft" mode="left" :width="320" @change="change($event,'showLeft')">
           <view class="close">
@@ -15,11 +15,10 @@
 
     <uni-section title="IOS教程" type="line">
       <view class="example-body">
-        <button type="primary" @click="showDrawer('showRight')"><text class="word-btn-white">Stream</text>
+        <button type="primary" @click="showDrawer('showRight')"><text class="word-btn-white">Stream食用方法</text>
         </button>
         <uni-drawer ref="showRight" mode="right" :width="320" @change="change($event,'showRight')">
           <view class="close">
-            <button @click="closeDrawer('showRight')"><text class="word-btn-white">关闭Drawer</text></button>
             <lbt :info='infoB' shebei="ios"></lbt>
           </view>
         </uni-drawer>

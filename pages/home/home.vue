@@ -1,7 +1,7 @@
 <template>
   <view>
     <uni-notice-bar class='notice' show-icon scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得" />
-    <uni-row class="demo-uni-row tip" width="730">
+    <uni-row class="demo-uni-row tip" width="730" style="font-size: 10px;">
       <uni-col :span="11">
         <view class="demo-uni-col dark">本站已运行<text style="color:red">{{timeD}}</text>
         </view>
@@ -14,12 +14,6 @@
     <!-- 基本用法 -->
     <uni-search-bar placeholder="快速找到" :radius="100" v-model="query"></uni-search-bar>
     <!-- 列表展示 -->
-    <uni-list style='color: red;'>
-      <!-- 假期提示 -->
-      <uni-list-item rightText="浪费性能"><template v-slot:body>
-          <text class="slot-box slot-text">放寒暑假就别上传了</text>
-        </template></uni-list-item>
-    </uni-list>
 
     <uni-collapse v-if="isShowList">
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">

@@ -10,16 +10,15 @@
       <view class="content">
 
         <view v-if="active === 0">
-          <uni-group title="食用教程">
+          <uni-group title="君绾墨教程">
             <uni-row class="demo-uni-row" :width="nvueWidth">
-              <uni-col :span="14">
-                <view class="demo-uni-col dark"><text style="color: skyblue;"
-                    @click="gotoWeb('https://czyx007.cn/archives/wireshark-sunnyrun')">HttpCanary食用方法
-                  </text></view>
-              </uni-col>
+              <div>
+                <text class="zyxJiao" @click="gotoWeb('https://czyx007.cn/archives/wireshark-sunnyrun')">HttpCanary食用
+                </text>
+              </div>
             </uni-row>
           </uni-group>
-          <uni-group title="个人制作教程">
+          <uni-group title="涂涂教程">
             <teach></teach>
           </uni-group>
         </view>
@@ -154,6 +153,13 @@
     /* #endif */
     padding: 5rpx 10rpx 0;
     overflow: hidden;
+  }
+
+  .zyxJiao {
+    color: skyblue;
+    background-color: #e5e9f2;
+    padding: 5px 20px;
+    border-radius: 20px;
   }
 
   footer {
