@@ -1,9 +1,9 @@
 <template>
-  <view>
-    <!-- <uni-section title="上传文件,不要乱传(该功能不开放)" type="line">
-      <view class="example-body">
-        <uni-file-picker limit="9" file-mediatype="all" title="最多选择9个文件"></uni-file-picker>
-      </view>
+  <view style="width: 100%;background-color: red;">
+    <!-- <uni-section title=" 上传文件,不要乱传(该功能不开放)" type="line">
+    <view class="example-body">
+      <uni-file-picker limit="9" file-mediatype="all" title="最多选择9个文件"></uni-file-picker>
+    </view>
     </uni-section> -->
     <uni-section title="食用步骤" type="line" padding>
       <uni-steps :options="list" active-icon="medal" :active="active" />
@@ -65,9 +65,9 @@
         <view v-if="active === 3">
           <uni-row class="demo-uni-row" :width="nvueWidth">
             <uni-col>
-              <view class="demo-uni-col dark block" style="padding: 30px 0px; height: 150px;">
-                注意事项
-                <ul>
+              <view class="demo-uni-col dark block" style="padding: 30px 10px 30px 0px; height: 240px;">
+
+                <ul>注意事项
                   <li>每个人只用一个昵称，滥用昵称后果自负</li>
                   <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
                   <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
@@ -79,8 +79,10 @@
         </view>
       </view>
     </uni-section>
-    <footer><button type="primary" size="mini" @click="change">下一步</button>
-      <text>本站承诺永久免费，但是不承诺永久维护</text>
+    <footer>
+      <view><button type="primary" size="mini" @click="change">下一步</button>
+        <text>本站承诺永久免费，但是不承诺永久维护</text>
+      </view>
     </footer>
   </view>
 </template>
@@ -185,7 +187,7 @@
   .block {
     height: 120px;
     margin: 20px;
-    padding: 30px;
+    padding: 20px;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -195,8 +197,9 @@
       justify-content: center;
     }
 
-    button {
-      background-color: red;
+    ul {
+      padding: 0 0 0 25px;
+      font-size: 16px;
     }
   }
 
@@ -205,15 +208,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    bottom: 32px;
+    justify-content: space-around;
+    bottom: 0;
+    margin-bottom: 32px;
     width: 100%;
+    max-width: 596px;
     height: 100px;
 
     button {
       display: block;
-      width: 100px;
-      height: 30px;
-      margin-bottom: 32px;
+      width: 150px;
+      height: 36px;
+      line-height: 36px;
+      background-color: limegreen;
     }
   }
 </style>

@@ -31,6 +31,11 @@
     // font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-family: "siyuan", "STXinwei" !important;
     background-color: #f5f5f5;
+    max-width: 600px;
+    min-height: 100%;
+    margin: 0px auto;
+    border-left: dashed 1px green;
+    border-right: dashed 1px green;
   }
 
   /* #endif */

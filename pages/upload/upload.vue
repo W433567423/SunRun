@@ -29,7 +29,7 @@
           </uni-collapse>
 
         </uni-forms>
-        <button type="primary" @click="submit('customForm')">提交</button>
+        <button type="primary" @click="submit('customForm')" style="background-color:limegreen;">提交</button>
       </view>
     </uni-section>
   </view>

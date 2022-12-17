@@ -16,10 +16,10 @@
         vertical: 'bottom',
         direction: 'horizontal',
         pattern: {
-          color: '#1ca035',
+          color: 'limegreen',
           backgroundColor: '#fff',
           selectedColor: '#007AFF',
-          buttonColor: '#1ca035',
+          buttonColor: 'limegreen',
           iconColor: '#fff'
         },
         is_color_type: false,

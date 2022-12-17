@@ -35,7 +35,7 @@
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "tutuのSunRun",
-    "navigationBarBackgroundColor": "#1ca035"
+    "navigationBarBackgroundColor": "limegreen"
   },
   "tabBar": {
     "list": [{
