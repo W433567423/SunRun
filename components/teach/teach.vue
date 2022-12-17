@@ -1,6 +1,6 @@
 <template>
   <view>
-    <uni-section title="安卓教程" type="line">
+    <uni-section title="Android" type="circle" titleFontSize="18px">
       <view class="example-body">
         <button type="primary" @click="showDrawer('showLeft')"><text class="word-btn-white">HttpCanary食用方法</text>
         </button>
@@ -13,7 +13,7 @@
     </uni-section>
 
 
-    <uni-section title="IOS教程" type="line">
+    <uni-section title="IOS" type="circle" titleFontSize="18px">
       <view class="example-body">
         <button type="primary" @click="showDrawer('showRight')"><text class="word-btn-white">Stream食用方法</text>
         </button>

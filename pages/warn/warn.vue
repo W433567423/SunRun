@@ -18,44 +18,64 @@
               </div>
             </uni-row>
           </uni-group>
-          <uni-group title="涂涂教程">
+          <uni-group title="涂涂教程(请先下载好软件)">
             <teach></teach>
           </uni-group>
         </view>
 
         <view v-if="active === 1">
-          安卓:<uni-icons type="cloud-download" size="24"></uni-icons>
-          <uni-link href="https://wwc.lanzoul.com/iPrXN0da7vpc" color="#999999" text="HttpCanary" showUnderLine="false"
-            font-size="20"></uni-link>[密码:tutu]<br>
-          <button class="mini-btn" type="primary" size="mini"
-            @click="gotoWeb('https://wwc.lanzoul.com/iPrXN0da7vpc')">立即下载</button><br>
-          IOS:<uni-icons type="cloud-download" size="24"></uni-icons>
-          <uni-link href="https://apps.apple.com/cn/app/stream/id1312141691" color="#999999" text="Stream"
-            showUnderLine="false" font-size="20"></uni-link><br>
-          <button class="mini-btn" type="primary" size="mini"
-            @click="gotoWeb('https://apps.apple.com/cn/app/stream/id1312141691')">立即下载</button>
+          <uni-row class="demo-uni-row" :width="nvueWidth">
+            <uni-col>
+              <view class="demo-uni-col light block">
+                <view>安卓:<uni-icons type="cloud-download" size="24"></uni-icons>
+                  <uni-link href="https://wwc.lanzoul.com/iPrXN0da7vpc" color="#1aa034" text="HttpCanary"
+                    showUnderLine="false" font-size="20"></uni-link>[密码:tutu]
+                </view>
+                <button class="mini-btn" type="primary" size="mini"
+                  @click="gotoWeb('https://wwc.lanzoul.com/iPrXN0da7vpc')">立即下载</button>
+              </view>
+              <hr>
+              <view class="demo-uni-col dark block">
+                <view>IOS:<uni-icons type="cloud-download" size="24"></uni-icons>
+                  <uni-link href="https://apps.apple.com/cn/app/stream/id1312141691" color="#1aa034" text="Stream"
+                    showUnderLine="false" font-size="20"></uni-link>
+                </view>
+                <button class="mini-btn" type="primary" size="mini"
+                  @click="gotoWeb('https://apps.apple.com/cn/app/stream/id1312141691')">立即下载</button>
+              </view>
+            </uni-col>
+          </uni-row>
         </view>
 
         <view v-if="active === 2">
-          <view class="tag-view">
-            <ul>
-              <li>付费答疑:QQ:227384408</li>
-              <li>不付费你来当免费客服！</li>
-              <li>先点击右下角关于我，再点击乐捐</li>
-              <li>【重申：付费的意义仅仅是为了避免不动脑就打扰】/li>
-              <li>一次三元，三元解君愁！！！</li>
-            </ul>
-          </view>
+          <uni-row class="demo-uni-row" :width="nvueWidth">
+            <uni-col>
+              <view class="demo-uni-col light block" style="padding: 30px 0px;">
+                <ul>
+                  <li>付费答疑:QQ:227384408</li>
+                  <li>先点击右下角[关于我]，再点击[乐捐]</li>
+                  <li>重申:付费的意义仅仅是为了避免不动脑就打扰</li>
+                  <li>一次三元，三元解君愁！！！</li>
+                </ul>
+              </view>
+            </uni-col>
+          </uni-row>
         </view>
 
         <view v-if="active === 3">
-          注意事项
-          <ul>
-            <li>每个人只用一个昵称，滥用昵称后果自负</li>
-            <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
-            <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
-            <li>南湖也可以用，不要再来问我了！很忙，谢谢！</li>
-          </ul>
+          <uni-row class="demo-uni-row" :width="nvueWidth">
+            <uni-col>
+              <view class="demo-uni-col dark block" style="padding: 30px 0px; height: 150px;">
+                注意事项
+                <ul>
+                  <li>每个人只用一个昵称，滥用昵称后果自负</li>
+                  <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
+                  <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
+                  <li>南湖也可以用，不要再来问我了！很忙，谢谢！</li>
+                </ul>
+              </view>
+            </uni-col>
+          </uni-row>
         </view>
       </view>
     </uni-section>
@@ -160,6 +180,24 @@
     background-color: #e5e9f2;
     padding: 5px 20px;
     border-radius: 20px;
+  }
+
+  .block {
+    height: 120px;
+    margin: 20px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+
+    view {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      background-color: red;
+    }
   }
 
   footer {

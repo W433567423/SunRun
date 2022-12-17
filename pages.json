@@ -26,13 +26,6 @@
       "navigationBarTitleText": "about "
     }
   }, {
-    "path": "pages/pc/pc",
-    "style": {
-      "navigationStyle": "custom",
-      "enablePullDownRefresh": false
-    }
-
-  }, {
     "path": "pages/person/person",
     "style": {
       "navigationBarTitleText": "",
