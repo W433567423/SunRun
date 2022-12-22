@@ -19,8 +19,7 @@
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
         <view class="content">
           <uni-list v-for="(item,i) in usersList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link
-              :to="'/pages/person/person?username='+item.username"
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link :to="'/pages/person/person?username='+item.username"
               v-if="!timeToDur(Number(item.time)+ 86400000 * 7).includes('-')">
             </uni-list-item>
 
@@ -35,8 +34,7 @@
       <uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true" v-if="!isShowList">
         <view class="content">
           <uni-list v-for="(item,i) in newList" :key="i">
-            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link
-              :to="'/pages/person/person?username='+item.username"
+            <uni-list-item :title="item.username" :rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link :to="'/pages/person/person?username='+item.username"
               v-if="!timeToDur(Number(item.time)+ 86400000 * 7).includes('-')">
             </uni-list-item>
             <uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
