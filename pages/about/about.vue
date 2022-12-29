@@ -165,7 +165,7 @@
 		width: 376px;
 		height: 254px;
 		// overflow: hidden;
-		background-color: red;
+		// background-color: red;
 		display: flex;
 
 		img:first-child {
