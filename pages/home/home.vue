@@ -13,40 +13,13 @@
 		</uni-row>
 		<!-- 基本用法 -->
 		<uni-search-bar placeholder="快速找到" :radius="100" v-model="query"></uni-search-bar>
-		<!-- 列表展示 -->
-
-		<uni-collapse v-if="isShowList">
-			<uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
-				<view class="content">
-					<uni-list v-for="(item,i) in usersList" :key="i">
-						<uni-list-item :title="item.username"
-							:rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link
-							:to="'/pages/person/person?username='+item.username"
-							v-if="!timeToDur(Number(item.time)+ 86400000 * 7).includes('-')">
-						</uni-list-item>
-
-						<uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
-						</uni-list-item>
-					</uni-list>
-				</view>
-			</uni-collapse-item>
-		</uni-collapse>
-		<!--筛选 -->
-		<uni-collapse v-else>
-			<uni-collapse-item title='小可耐们' title-border="none" :border="false" :open="true">
-				<view class="content">
-					<uni-list v-for="(item,i) in newList" :key="i">
-						<uni-list-item :title="item.username"
-							:rightText="'有效期:'+timeToDur(Number(item.time)+ 86400000 * 7)" link
-							:to="'/pages/person/person?username='+item.username"
-							v-if="!timeToDur(Number(item.time)+ 86400000 * 7).includes('-')">
-						</uni-list-item>
-						<uni-list-item :title="item.username" :disabled="true" rightText="有效期:已失效" v-else>
-						</uni-list-item>
-					</uni-list>
-				</view>
-			</uni-collapse-item>
-		</uni-collapse>
+		<!-- 列表展示   筛选 -->
+		<coll-view :list="isShowList?usersList:newList"></coll-view>
+		
+		<!-- <template v-else>
+			<coll-view :list="newList"></coll-view>
+		</template> -->
+		
 		<!-- 悬浮 -->
 		<my-button></my-button>
 	</view>
